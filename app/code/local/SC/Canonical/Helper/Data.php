@@ -18,7 +18,10 @@ class SC_Canonical_Helper_Data extends Mage_Core_Helper_Abstract
              $host = $parsedUrl['host'];
              $port = isset($parsedUrl['port']) ? $parsedUrl['port'] : null;
              $path = $parsedUrl['path'];
-             $headUrl = $scheme . '://' . $host . ($port && '80' != $port ? ':' . $port : '') . $path;
+             
+             $headUrl = $scheme . '://' . $host . ($port && '80' != $port ? ':' . $port : '');
+             if($path != '/index.php')
+                  $headUrl .= $path;
              
              if (!preg_match('/\.(rss|html|htm|xml|php?)$/', strtolower($headUrl)) && substr($headUrl, -1) != '/')
              {
