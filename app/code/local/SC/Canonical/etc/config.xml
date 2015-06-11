@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* @category   SC
+* @package    SC_Canonical
+* @author     Simone Cabrino
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+
+<config>
+    <modules>
+        <SC_Canonical>
+            <version>0.1.0</version>
+        </SC_Canonical>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <sc_canonical>
+                    <file>canonical.xml</file>
+                </sc_canonical>
+            </updates>
+        </layout>
+        
+    </frontend> 
+    <adminhtml>
+        <layout>
+            <updates>
+                <sc_canonical>
+                    <file>canonical.xml</file>
+                </sc_canonical>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <canonical>
+                <class>SC_Canonical_Model</class>
+            </canonical>
+        </models>
+        <resources>
+            <canonical_setup>
+                <setup>
+                    <module>SC_Canonical</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </canonical_setup>
+        </resources>
+        <events>
+            
+            <catalog_product_save_after>
+                <observers>
+                    <canonical>
+                        <type>singleton</type>
+                        <class>canonical/observer</class>
+                        <method>saveCanonicalUrl</method>
+                    </canonical>
+                </observers>
+            </catalog_product_save_after>
+        </events> 
+        <blocks>
+            <sc_canonical>
+                <class>SC_Canonical_Block</class>
+            </sc_canonical>
+        </blocks>
+        <helpers>
+            <canonical>
+                <class>SC_Canonical_Helper</class>
+            </canonical>
+        </helpers>
+    </global>
+</config>
